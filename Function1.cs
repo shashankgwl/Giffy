@@ -1,15 +1,14 @@
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
-
 namespace GifConvert
 {
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Azure.WebJobs;
+    using Microsoft.Azure.WebJobs.Extensions.Http;
+    using Microsoft.Extensions.Logging;
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Threading.Tasks;
     public static class Function1
     {
 
