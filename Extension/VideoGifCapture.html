@@ -6,17 +6,65 @@
 
     <meta id="theme-color" name="theme-color" content="#ffffff">-->
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+
+        .blink {
+            animation: blink-animation 1s steps(5, start) infinite;
+            -webkit-animation: blink-animation 1s steps(5, start) infinite;
+        }
+
+        @keyframes blink-animation {
+            to {
+                visibility: hidden;
+            }
+        }
+
+        @-webkit-keyframes blink-animation {
+            to {
+                visibility: hidden;
+            }
+        }
+
+        html {
+            width: 1000px; /* max: 1000px */
+            height: 750px; /* max: 750px */
+        }
+
+        .center {
+            margin: auto;
+            width: 50%;
+            border: 0px;
+            padding: 10px;
+        }
+    </style>
     <title></title>
+    <script src="jQuery371.js"></script>
+    <script src="bootstrap.min.js"></script>
     <script src="GifCapture.js"></script>
-    
 </head>
 
-<body>
-    <h2>Start Recording</h2>
+<body style="height:600px;width:800px">
 
-    <button id="startRecording">start recording</button>
-    <button id="stopRecording">stop recording</button>
-    <video height="600" width="800" id="videoElem" autoplay playsinline muted></video>
+
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1>GIFfy screen recorder</h1>
+            <p>Record a video or your screen using your browser's native display capture and convert the video in a GIF file</p>
+            <p>All the images are deleted two seconds after they've been generated.</p>
+        </div>
+    </div>
+
+    <div class="center">
+        <button id="startRecording" class="btn btn-primary">start recording</button>
+        <button id="stopRecording" class="btn btn-danger">stop recording</button>
+    </div>
+
+    <div id="blinkingText">
+        <span style="font-size:15px" class="blink"><b>Please wait while the GIF is being prepared and downloaded.</b></span>
+    </div>
+    <video height="600" width="1200" controls id="videoElem" autoplay playsinline muted></video>
     <br />
 
 </body>

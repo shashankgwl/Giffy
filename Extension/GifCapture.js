@@ -9,14 +9,29 @@ const displayMediaOptions = {
 var mediaRecorder;
 var recordingData = [];
 
+
 window.addEventListener('DOMContentLoaded', function () {
     document.getElementById("startRecording").addEventListener("click", startCapture);
     document.getElementById("stopRecording").addEventListener("click", stopCapture);
+    $('#blinkingText').hide();
+
 });
+
+
 
 async function stopCapture() {
     var vElem = document.getElementById("videoElem");
+    $('#blinkingText').show();
+
+    if (vElem.srcObject === null || vElem.srcObject === undefined) {
+        return
+    }
+
     let tracks = vElem.srcObject.getTracks();
+    if (tracks == null || tracks == undefined) {
+        return
+    }
+
 
     tracks.forEach((track) => track.stop());
     vElem.srcObject = null;
@@ -49,6 +64,7 @@ async function startCapture() {
                     recordingData.push(event.data);
 
                     let blob = new Blob(recordingData, { type: 'video/webm;codecs=h264' });
+                    document.getElementById("videoElem").src = URL.createObjectURL(blob)
                     convertBlobToBase64(blob).then(base64 => {
 
                         //let blob = new Blob(recordingData, { type: 'video/mp4' });
@@ -78,6 +94,8 @@ async function startCapture() {
 
                             // Remove the link from the body
                             document.body.removeChild(link);
+                            $('#blinkingText').hide();
+
                         })
 
 

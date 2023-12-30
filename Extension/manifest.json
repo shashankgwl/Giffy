@@ -1,7 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Giftastic",
-  "description": "Base Level Extension",
+  "author": "Shashank Bhide",
+  "name": "GIFfy Recorder",
+  "description": "Record a video or your screen using your browser's native display capture and convert the video in a GIF file",
   "version": "1.0",
   "action": {
     "default_popup": "VideoGifCapture.html",
