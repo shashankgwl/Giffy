@@ -36,8 +36,6 @@ namespace GifConvert
             var gifPath = $"{outputPath}\\{context}";
             File.WriteAllBytes(webmPath, blobData);
 
-            //JObject data = JsonConvert.DeserializeObject<JObject>(requestBody);
-
             using (var p = new Process())
             {
                 p.StartInfo.UseShellExecute = false;
@@ -68,11 +66,6 @@ namespace GifConvert
                 File.Delete(webmPath);
             });
             return new FileContentResult(gifBase64, "application/octet-stream");
-            //return new OkObjectResult(new
-            //{
-            //    response = "Ok",
-            //    fileData = gifBase64
-            //});
         }
 
 
