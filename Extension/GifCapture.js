@@ -10,7 +10,6 @@ var mediaRecorder;
 var recordingData = [];
 
 window.addEventListener('DOMContentLoaded', function () {
-    //your code here
     document.getElementById("startRecording").addEventListener("click", startCapture);
     document.getElementById("stopRecording").addEventListener("click", stopCapture);
 });
@@ -34,22 +33,14 @@ async function convertBlobToBase64(blob) {
         reader.readAsDataURL(blob);
     });
 }
-/*
-let url = window.URL.createObjectURL(blob);
-let a = document.createElement('a');
-a.style.display = 'none';
-a.href = url;
-a.download = 'test.gif';
-document.body.appendChild(a);
-a.click();
-*/
+
 
 async function startCapture() {
     try {
         navigator.mediaDevices.getDisplayMedia(displayMediaOptions).then(stream => {
             var vElem = document.getElementById("videoElem");
             vElem.srcObject = stream
-            let options = { mimeType: 'video/webm;codecs=vp9.0' };
+            let options = { mimeType: 'video/webm;codecs=h264' };
             //let options = { mimeType: 'video/mp4' };
             mediaRecorder = new MediaRecorder(stream, options)
 
@@ -57,7 +48,7 @@ async function startCapture() {
                 if (event.data && event.data.size > 0) {
                     recordingData.push(event.data);
 
-                    let blob = new Blob(recordingData, { type: 'video/webm;codecs=vp9.0' });
+                    let blob = new Blob(recordingData, { type: 'video/webm;codecs=h264' });
                     convertBlobToBase64(blob).then(base64 => {
 
                         //let blob = new Blob(recordingData, { type: 'video/mp4' });
