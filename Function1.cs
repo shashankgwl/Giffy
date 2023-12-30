@@ -26,32 +26,32 @@ namespace GifConvert
 
             var context = Guid.NewGuid().ToString();
 
-            byte[] blobData = Convert.FromBase64String(GetDataAfterBase64(requestBody));
-            Console.WriteLine(blobData.Length);
+            var blobData = Convert.FromBase64String(GetDataAfterBase64(requestBody));
+            log.LogInformation($"Total length of the incoming file is {blobData.Length} bytes.");
             var inputPath = "C:\\home\\site\\wwwroot\\received";
             var outputPath = "C:\\home\\site\\wwwroot\\GIF";
             var exePath = "C:\\home\\site\\wwwroot\\ffmpeg\\ffmpeg.exe";
 
             var webmPath = $"{inputPath}\\{context}.webm";
-            var gifPath = $"{outputPath}\\{context}";
+            var gifPath = $"{outputPath}\\{context}.gif";
             File.WriteAllBytes(webmPath, blobData);
 
-            using (var p = new Process())
+            using (var ffmpeg = new Process())
             {
-                p.StartInfo.UseShellExecute = false;
-                p.StartInfo.RedirectStandardOutput = true;
+                ffmpeg.StartInfo.UseShellExecute = false;
+                ffmpeg.StartInfo.RedirectStandardOutput = true;
                 string eOut = null;
-                p.StartInfo.RedirectStandardError = true;
-                p.ErrorDataReceived += new DataReceivedEventHandler((sender, e) =>
+                ffmpeg.StartInfo.RedirectStandardError = true;
+                ffmpeg.ErrorDataReceived += new DataReceivedEventHandler((sender, e) =>
                 { eOut += e.Data; });
-                p.StartInfo.FileName = exePath;
-                p.StartInfo.Arguments = $"-i  {webmPath} -filter_complex \"fps=25, scale=800:-1\" -pix_fmt rgb8 {gifPath}.gif";
-                p.Start();
+                ffmpeg.StartInfo.FileName = exePath;
+                ffmpeg.StartInfo.Arguments = $"-i  {webmPath} -filter_complex \"fps=25, scale=800:-1\" -pix_fmt rgb8 {gifPath}";
+                ffmpeg.Start();
 
                 // To avoid deadlocks, use an asynchronous read operation on at least one of the streams.  
-                p.BeginErrorReadLine();
-                string output = p.StandardOutput.ReadToEnd();
-                p.WaitForExit();
+                ffmpeg.BeginErrorReadLine();
+                string output = ffmpeg.StandardOutput.ReadToEnd();
+                ffmpeg.WaitForExit();
 
                 log.LogInformation($"The Exe Result are:\n'{output}'");
                 log.LogInformation($"\nError stream: {(string)null}");
@@ -59,11 +59,21 @@ namespace GifConvert
             }
 
 
-            var gifBase64 = File.ReadAllBytes(gifPath + ".gif");
+            var gifBase64 = File.ReadAllBytes(gifPath);
             await Task.Delay(2000).ContinueWith(task =>
             {
-                File.Delete(gifPath + ".gif");
-                File.Delete(webmPath);
+                
+                if (File.Exists(gifPath))
+                {
+                    log.LogInformation($"Deleting {gifPath} file");
+                    File.Delete(gifPath);
+                }
+
+                if (File.Exists(webmPath))
+                {
+                    log.LogInformation($"Deleting {webmPath} file");
+                    File.Delete(webmPath);
+                }
             });
             return new FileContentResult(gifBase64, "application/octet-stream");
         }
