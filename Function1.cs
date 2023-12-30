@@ -17,14 +17,13 @@ namespace GifConvert
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
         ILogger log)
         {
-
             string requestBody = string.Empty;
             using (var streamReader = new StreamReader(req.Body))
             {
                 requestBody = await streamReader.ReadToEndAsync();
             }
 
-            var context = Guid.NewGuid().ToString();
+            ////var context = Guid.NewGuid().ToString();
 
             var blobData = Convert.FromBase64String(GetDataAfterBase64(requestBody));
             log.LogInformation($"Total length of the incoming file is {blobData.Length} bytes.");
@@ -32,8 +31,8 @@ namespace GifConvert
             var outputPath = "C:\\home\\site\\wwwroot\\GIF";
             var exePath = "C:\\home\\site\\wwwroot\\ffmpeg\\ffmpeg.exe";
 
-            var webmPath = $"{inputPath}\\{context}.webm";
-            var gifPath = $"{outputPath}\\{context}.gif";
+            var webmPath = $"{inputPath}\\{Guid.NewGuid()}.webm";
+            var gifPath = $"{outputPath}\\{Guid.NewGuid()}.gif";
             File.WriteAllBytes(webmPath, blobData);
 
             using (var ffmpeg = new Process())
@@ -54,15 +53,14 @@ namespace GifConvert
                 ffmpeg.WaitForExit();
 
                 log.LogInformation($"The Exe Result are:\n'{output}'");
-                log.LogInformation($"\nError stream: {(string)null}");
-                log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
+                log.LogInformation($"C# function executed at: {DateTime.Now}");
             }
 
 
             var gifBase64 = File.ReadAllBytes(gifPath);
-            await Task.Delay(2000).ContinueWith(task =>
+            await Task.Delay(1000).ContinueWith(task =>
             {
-                
+
                 if (File.Exists(gifPath))
                 {
                     log.LogInformation($"Deleting {gifPath} file");
