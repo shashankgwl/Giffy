@@ -56,7 +56,6 @@ namespace GifConvert
                 log.LogInformation($"C# function executed at: {DateTime.Now}");
             }
 
-
             var gifBase64 = File.ReadAllBytes(gifPath);
             await Task.Delay(1000).ContinueWith(task =>
             {

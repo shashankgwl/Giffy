@@ -2,10 +2,12 @@
   "manifest_version": 3,
   "author": "Shashank Bhide",
   "name": "GIFfy Recorder",
-  "description": "Record a video or your screen using your browser's native display capture and convert the video in a GIF file",
+  "description": "Record a video or your screen using your browser's native display capture and convert the video in a GIF file.",
   "version": "1.0",
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
-    "default_popup": "VideoGifCapture.html",
     "default_icon": "icon.png"
   }
 }
