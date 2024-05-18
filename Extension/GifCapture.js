@@ -1,1 +1,54 @@
-const _0x3ca441 = _0x2cf2; (function (_0x5c60f3, _0x176028) { const _0x2310d0 = _0x2cf2, _0x3f4e54 = _0x5c60f3(); while (!![]) { try { const _0x269082 = parseInt(_0x2310d0(0x106)) / 0x1 * (parseInt(_0x2310d0(0x11d)) / 0x2) + -parseInt(_0x2310d0(0x100)) / 0x3 * (-parseInt(_0x2310d0(0x101)) / 0x4) + parseInt(_0x2310d0(0x108)) / 0x5 + parseInt(_0x2310d0(0xf8)) / 0x6 * (-parseInt(_0x2310d0(0xff)) / 0x7) + parseInt(_0x2310d0(0x126)) / 0x8 + -parseInt(_0x2310d0(0x105)) / 0x9 + -parseInt(_0x2310d0(0x10d)) / 0xa; if (_0x269082 === _0x176028) break; else _0x3f4e54['push'](_0x3f4e54['shift']()); } catch (_0x1d38fc) { _0x3f4e54['push'](_0x3f4e54['shift']()); } } }(_0x3e09, 0x5e022)); const displayMediaOptions = { 'video': { 'displaySurface': _0x3ca441(0x127) }, 'audio': ![] }; function _0x3e09() { const _0xb2b1ad = ['videoElem', 'stop', 'body', 'video/webm;codecs=h264', 'result', 'download.gif', 'data', 'getTracks', 'log', 'getElementById', 'createElement', 'appendChild', 'download', 'onload', '2538xPnCty', 'error', 'image/gif', 'start', 'the\x20length\x20is\x20', 'srcObject', 'hide', 'removeChild', 'size', '2238840MrdGxg', 'window', 'mediaDevices', '1488900RnKFGL', 'startRecording', 'length', 'POST', 'Error:\x20', 'addEventListener', 'getDisplayMedia', '14MfVdhD', '27VHAphG', '36124dCJytH', 'err', 'createObjectURL', 'click', '1165086MxvNhV', '66OukXMX', 'stopRecording', '3194335SxjrRx', 'show', 'then', 'href', 'arrayBuffer', '729430mtqdtY', '#blinkingText']; _0x3e09 = function () { return _0xb2b1ad; }; return _0x3e09(); } function _0x2cf2(_0x3b0308, _0x2e3b75) { const _0x3e0956 = _0x3e09(); return _0x2cf2 = function (_0x2cf26a, _0x2327a2) { _0x2cf26a = _0x2cf26a - 0xf7; let _0xb36e7f = _0x3e0956[_0x2cf26a]; return _0xb36e7f; }, _0x2cf2(_0x3b0308, _0x2e3b75); } var mediaRecorder, recordingData = []; async function stopCapture() { const _0x5ae646 = _0x3ca441; var _0x570583 = document[_0x5ae646(0x118)](_0x5ae646(0x10f)); if ($(_0x5ae646(0x10e))[_0x5ae646(0x109)](), null === _0x570583[_0x5ae646(0x122)] || void 0x0 === _0x570583[_0x5ae646(0x122)]) return; let _0x3ed2c4 = _0x570583[_0x5ae646(0x122)][_0x5ae646(0x116)](); null != _0x3ed2c4 && void 0x0 != _0x3ed2c4 && (_0x3ed2c4['forEach'](_0x58431a => _0x58431a[_0x5ae646(0x110)]()), _0x570583[_0x5ae646(0x122)] = null, mediaRecorder['stop']()); } async function convertBlobToBase64(_0x34b095) { return new Promise((_0x2ec692, _0x4a461e) => { const _0xc69a33 = _0x2cf2; let _0x162fc3 = new FileReader(); _0x162fc3['onerror'] = _0x4a461e, _0x162fc3[_0xc69a33(0x11c)] = () => { const _0x1b4e3d = _0xc69a33; _0x2ec692(_0x162fc3[_0x1b4e3d(0x113)]); }, _0x162fc3['readAsDataURL'](_0x34b095); }); } async function startCapture() { const _0x399c3d = _0x3ca441; try { navigator[_0x399c3d(0xf7)][_0x399c3d(0xfe)](displayMediaOptions)[_0x399c3d(0x10a)](_0x25a315 => { const _0x5665dc = _0x399c3d; document[_0x5665dc(0x118)]('videoElem')['srcObject'] = _0x25a315, (mediaRecorder = new MediaRecorder(_0x25a315, { 'mimeType': 'video/webm;codecs=h264' }))['ondataavailable'] = _0x3ac8f9 => { const _0x244d7a = _0x5665dc; if (_0x3ac8f9[_0x244d7a(0x115)] && _0x3ac8f9[_0x244d7a(0x115)][_0x244d7a(0x125)] > 0x0) { recordingData['push'](_0x3ac8f9[_0x244d7a(0x115)]); let _0x1891c8 = new Blob(recordingData, { 'type': _0x244d7a(0x112) }); document['getElementById'](_0x244d7a(0x10f))['src'] = URL[_0x244d7a(0x103)](_0x1891c8), convertBlobToBase64(_0x1891c8)['then'](_0x4507de => { const _0x165eba = _0x244d7a; console[_0x165eba(0x117)](_0x165eba(0x121) + recordingData[_0x165eba(0xfa)]), fetch('https://tp2function.azurewebsites.net/api/FxBlobReceiver', { 'method': _0x165eba(0xfb), 'body': _0x4507de })[_0x165eba(0x10a)](_0x2c9c04 => _0x2c9c04[_0x165eba(0x10c)]())['then'](_0x15fea2 => { const _0x18e39d = _0x165eba; let _0x5f4978 = new Blob([new Uint8Array(_0x15fea2)], { 'type': _0x18e39d(0x11f) }), _0x16b991 = document[_0x18e39d(0x119)]('a'); _0x16b991[_0x18e39d(0x11b)] = _0x18e39d(0x114), _0x16b991[_0x18e39d(0x10b)] = URL[_0x18e39d(0x103)](_0x5f4978), document[_0x18e39d(0x111)][_0x18e39d(0x11a)](_0x16b991), _0x16b991[_0x18e39d(0x104)](), document['body'][_0x18e39d(0x124)](_0x16b991), $(_0x18e39d(0x10e))[_0x18e39d(0x123)](); }), recordingData = []; }); } }, mediaRecorder[_0x5665dc(0x120)](); })[_0x399c3d(0x102)](_0x336b98 => { const _0x3ef131 = _0x399c3d; console[_0x3ef131(0x11e)](_0x3ef131(0xfc) + _0x336b98); }); } catch (_0x20a918) { } } window[_0x3ca441(0xfd)]('DOMContentLoaded', function () { const _0x1ff61b = _0x3ca441; document[_0x1ff61b(0x118)](_0x1ff61b(0xf9))[_0x1ff61b(0xfd)](_0x1ff61b(0x104), startCapture), document['getElementById'](_0x1ff61b(0x107))[_0x1ff61b(0xfd)](_0x1ff61b(0x104), stopCapture), $(_0x1ff61b(0x10e))[_0x1ff61b(0x123)](); });
+const displayMediaOptions = { video: { displaySurface: "window" }, audio: false };
+var mediaRecorder,
+    recordingData = [];
+async function stopCapture() {
+    var e = document.getElementById("videoElem");
+    if (($("#blinkingText").show(), null === e.srcObject || void 0 === e.srcObject)) return;
+    let t = e.srcObject.getTracks();
+    null != t && void 0 != t && (t.forEach((e) => e.stop()), (e.srcObject = null), mediaRecorder.stop());
+}
+async function convertBlobToBase64(e) {
+    return new Promise((t, r) => {
+        let a = new FileReader();
+        (a.onerror = r),
+            (a.onload = () => {
+                t(a.result);
+            }),
+            a.readAsDataURL(e);
+    });
+}
+async function startCapture() {
+    try {
+        navigator.mediaDevices
+            .getDisplayMedia(displayMediaOptions)
+            .then((e) => {
+                (document.getElementById("videoElem").srcObject = e),
+                    ((mediaRecorder = new MediaRecorder(e, { mimeType: "video/webm;codecs=h264" })).ondataavailable = (e) => {
+                        if (e.data && e.data.size > 0) {
+                            recordingData.push(e.data);
+                            let t = new Blob(recordingData, { type: "video/webm;codecs=h264" });
+                            (document.getElementById("videoElem").src = URL.createObjectURL(t)),
+                                convertBlobToBase64(t).then((e) => {
+                                    console.log("the length is " + recordingData.length),
+                                        //fetch("https://tp2function.azurewebsites.net/api/FxBlobReceiver", { method: "POST", body: e })
+                                        fetch("http://localhost:7016/api/FxBlobReceiver", { method: "POST", body: e })
+                                            .then((e) => e.arrayBuffer())
+                                            .then((e) => {
+                                                let t = new Blob([new Uint8Array(e)], { type: "image/gif" }),
+                                                    r = document.createElement("a");
+                                                (r.download = "download.gif"), (r.href = URL.createObjectURL(t)), document.body.appendChild(r), r.click(), document.body.removeChild(r), $("#blinkingText").hide();
+                                            }),
+                                        (recordingData = []);
+                                });
+                        }
+                    }),
+                    mediaRecorder.start();
+            })
+            .err((e) => {
+                console.error(`Error: ${e}`);
+            });
+    } catch (e) { }
+}
+window.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("startRecording").addEventListener("click", startCapture), document.getElementById("stopRecording").addEventListener("click", stopCapture), $("#blinkingText").hide();
+});

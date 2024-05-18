@@ -1,5 +1,8 @@
 namespace GifConvert
 {
+    using DocumentFormat.OpenXml;
+    using DocumentFormat.OpenXml.Packaging;
+    using DocumentFormat.OpenXml.Wordprocessing;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Azure.WebJobs;
@@ -11,6 +14,56 @@ namespace GifConvert
     using System.Threading.Tasks;
     public static class Function1
     {
+
+        [FunctionName("CreateWordDocument")]
+        public static IActionResult CreateWordDocument(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req)
+        {
+            var stream = new MemoryStream();
+            using (var wordDocument = WordprocessingDocument.Create(stream, WordprocessingDocumentType.Document, true))
+            {
+                var mainPart = wordDocument.AddMainDocumentPart();
+                mainPart.Document = new Document();
+                var body = mainPart.Document.AppendChild(new Body());
+                var para = body.AppendChild(new Paragraph());
+                var run = para.AppendChild(new Run() { RunProperties = new RunProperties { Bold = new Bold() } });
+
+                run.AppendChild(new Text("1st Layer Title"));
+                para = body.AppendChild(new Paragraph());
+                run = para.AppendChild(new Run());
+                run.AppendChild(new Text("1st Layer Detials"));
+
+                para = body.AppendChild(new Paragraph());
+                run = para.AppendChild(new Run() { RunProperties = new RunProperties { Bold = new Bold() } });
+                run.AppendChild(new TabChar());
+                run = para.AppendChild(new Run() { RunProperties = new RunProperties { Bold = new Bold(), Underline = new Underline() { Val = UnderlineValues.Single } } });
+                run.AppendChild(new Text("Second Layer title"));
+
+                para = body.AppendChild(new Paragraph());
+                run = para.AppendChild(new Run());
+                run.AppendChild(new TabChar());
+                run.AppendChild(new Text("Second Layer details"));
+
+
+                para = body.AppendChild(new Paragraph());
+                run = para.AppendChild(new Run() { RunProperties = new RunProperties { Bold = new Bold(), Italic = new Italic() { Val = new OnOffValue(true) } } });
+                run.AppendChild(new TabChar());
+                run.AppendChild(new TabChar());
+                ////run = para.AppendChild(new Run() { RunProperties = new RunProperties { Bold = new Bold(), Italic = new Italic() { Val = new OnOffValue(true) } } });
+                run.AppendChild(new Text("Third layer title"));
+
+                para = body.AppendChild(new Paragraph());
+                run = para.AppendChild(new Run());
+                run.AppendChild(new TabChar());
+                run.AppendChild(new TabChar());
+                run.AppendChild(new Text("Third Layer's details"));
+            }
+            stream.Position = 0;
+            return new FileStreamResult(stream, "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+            {
+                FileDownloadName = "Document.docx"
+            };
+        }
 
         [FunctionName("FxBlobReceiver")]
         public static async Task<IActionResult> Run(
