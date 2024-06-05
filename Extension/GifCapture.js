@@ -30,7 +30,6 @@ async function startCapture() {
                             (document.getElementById("videoElem").src = URL.createObjectURL(t)),
                                 convertBlobToBase64(t).then((e) => {
                                     console.log("the length is " + recordingData.length),
-                                        //fetch("https://tp2function.azurewebsites.net/api/FxBlobReceiver", { method: "POST", body: e })
                                         fetch("http://localhost:7016/api/FxBlobReceiver", { method: "POST", body: e })
                                             .then((e) => e.arrayBuffer())
                                             .then((e) => {
